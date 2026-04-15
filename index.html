@@ -1,0 +1,58 @@
+cat > index.html << 'EOF'
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쇼핑몰 분석 리포트</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+  :root { --bg:#0f0f13; --surface:#17171d; --surface2:#1e1e27; --border:#2a2a38; --accent:#6c63ff; --accent2:#a89cff; --text:#e8e6f0; --text-muted:#6b6880; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+  .header { padding:28px 32px 0; border-bottom:1px solid var(--border); background:var(--surface); }
+  .header-top { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .logo-dot { width:8px; height:8px; background:var(--accent); border-radius:50%; box-shadow:0 0 10px var(--accent); }
+  .header-title { font-size:13px; font-weight:500; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; }
+  .tabs { display:flex; overflow-x:auto; scrollbar-width:none; }
+  .tabs::-webkit-scrollbar { display:none; }
+  .tab { flex-shrink:0; padding:0 20px; height:56px; display:flex; align-items:center; gap:8px; font-size:13px; font-weight:400; color:var(--text-muted); cursor:pointer; border-bottom:2px solid transparent; border-top:none; border-left:none; border-right:none; background:transparent; outline:none; white-space:nowrap; transition:all 0.2s; }
+  .tab:hover { color:var(--text); background:rgba(108,99,255,0.05); }
+  .tab.active { color:var(--accent2); border-bottom-color:var(--accent); font-weight:600; }
+  .tab-num { width:20px; height:20px; background:var(--surface2); border-radius:4px; font-size:11px; display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-weight:500; }
+  .tab.active .tab-num { background:var(--accent); color:#fff; }
+  .content { padding:32px; max-width:1100px; margin:0 auto; }
+  .panel { display:none; animation:fadeIn 0.25s ease; }
+  .panel.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  .panel-title { font-size:18px; font-weight:700; margin-bottom:6px; }
+  .panel-sub { font-size:12px; color:var(--text-muted); margin-bottom:20px; }
+  .img-wrap { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; }
+  .img-wrap img { width:100%; height:auto; display:block; border-radius:6px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top"><div class="logo-dot"></div><span class="header-title">쇼핑몰 종합 분석 리포트</span></div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(0)"><span class="tab-num">1</span> 국가별 트래픽</button>
+    <button class="tab" onclick="switchTab(1)"><span class="tab-num">2</span> 회원 세그먼트</button>
+    <button class="tab" onclick="switchTab(2)"><span class="tab-num">3</span> 유형상품 5관점</button>
+    <button class="tab" onclick="switchTab(3)"><span class="tab-num">4</span> 유형상품 종합</button>
+  </div>
+</div>
+<div class="content">
+  <div class="panel active"><div class="panel-title">쇼핑몰 국가별 트래픽 종합 분석</div><div class="panel-sub">국가별 UV·비율 상위 20개국 / 체류시간·PV·구매전환율 교차 분석</div><div class="img-wrap"><img src="img1.png"></div></div>
+  <div class="panel"><div class="panel-title">유형상품 구매 기반 회원 세그먼트 종합 분석</div><div class="panel-sub">VIP·일반 활성·잠재 복귀·장기 휴면·비구매 가입 / 세그먼트별 회원 수·비율·평균 구매액</div><div class="img-wrap"><img src="img2.png"></div></div>
+  <div class="panel"><div class="panel-title">유형상품 구매 회원 — 5가지 관점 종합 분석</div><div class="panel-sub">구매 횟수별 분포 / 연령대·성별 교차 / 구매 주기 / 휴면 회원 / 국내·해외 배송 비중</div><div class="img-wrap"><img src="img3.png"></div></div>
+  <div class="panel"><div class="panel-title">유형상품 구매 회원 종합 분석 리포트</div><div class="panel-sub">구매 횟수별 분포 / 연령대·성별 교차분석 / 구매 주기 / 휴면 회원 / 국내·해외 비중</div><div class="img-wrap"><img src="img4.png"></div></div>
+</div>
+<script>
+  function switchTab(idx) {
+    document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+    document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+  }
+</script>
+</body>
+</html>
+EOF
